@@ -2,10 +2,10 @@ import './App.css';
 import {useState } from "react";
 import Axios from "axios";
 
+
 function App() {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [gmail, setGmail] = useState("");
+const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [DataUser, setDataUser] = useState([]);
@@ -16,21 +16,22 @@ function App() {
     });
   };
 
+  
+
  const addUser = () => {
   Axios.post("http://localhost:3333/create",{
-    fname : fname,
-    lname : lname,
-    gmail : gmail,
-    password : password
+    name : name,
+    email : email,
+    password : password 
 
   }).then(()=>{
     setDataUser([
       ...DataUser,
       {
-        fname : fname,
-        lname : lname,
-        gmail : gmail,
-        password : password },
+        name : name,
+        email : email,
+        password : password 
+      },
     ]);
 
   });
@@ -38,30 +39,28 @@ function App() {
  };
   return (
     <div className="App">
+       
+       <div className='container'>
+      
+       <div className='form-insert'>
        <h1>INSERTFORM</h1>
-       <div>
        <form>
         <div>
-          <label>FNAME:</label>
-          <input type="text" placehoder="INPUT FNAME" onChange={(event)=>{
-            setFname(event.target.value)
+          <div><label>Username:</label></div>
+          <input type="text" placehoder="Username" onChange={(event)=>{
+            setName(event.target.value)
+          }}/>
+        </div>
+        
+        <div>
+          <div><label>Email:</label></div>
+          <input type="text" placehoder="Email" onChange={(event)=>{
+            setEmail(event.target.value)
           }}/>
         </div>
         <div>
-          <label>LNAME:</label>
-          <input type="text" placehoder="INPUT LNAME" onChange={(event)=>{
-            setLname(event.target.value)
-          }}/>
-        </div>
-        <div>
-          <label>GMAIL:</label>
-          <input type="text" placehoder="INPUT GMAIL" onChange={(event)=>{
-            setGmail(event.target.value)
-          }}/>
-        </div>
-        <div>
-          <label>PASSWORD:</label>
-          <input type="text" placehoder="INPUT PASSWORD" onChange={(event)=>{
+          <div><label>Password:</label></div>
+          <input type="text" placehoder="Password" onChange={(event)=>{
             setPassword(event.target.value)
           }}/>
         </div>
@@ -70,29 +69,33 @@ function App() {
         </div>
        </form>
        </div>
-       <hr/>
-       <hr />
-      <div className="employees">
+      <div className="show-form">
         <button class="btn btn-primary" onClick={getUsers}>
           Show Employees
         </button>
         <br />
         <br />
+        <div className="show-data">
+          <div className='thead'>
+            <div>Username</div>
+            <div>Email</div>
+            <div>Password</div>
+
+          </div>
         {DataUser.map((val, key) => {
           return (
-            <div className="employee card">
-              <div className="card-body text-left">
-                <p className="card-text">Name: {val.fname}</p>
-                <p className="card-text">Age: {val.lname}</p>
-                <p className="card-text">Country: {val.gmail}</p>
-                <p className="card-text">Position: {val.password}</p>
-                
+              <div className="card-body ">
+                <div className='dataname show'> {val.Username}</div>
+                <div className='dataemail show'> {val.Email}</div>
+                <div className='datapassword show'>{val.Password}</div>
               </div>
-            </div>
+            
           );
         })}
+        </div>
       </div>
 
+       </div>
       
     </div>
     
