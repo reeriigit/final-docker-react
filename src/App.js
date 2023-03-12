@@ -1,6 +1,7 @@
 import './App.css';
 import {useState } from "react";
 import Axios from "axios";
+import backimg from './backimg.jpg'; 
 
 
 function App() {
@@ -39,7 +40,8 @@ const [name, setName] = useState("");
  };
   return (
     <div className="App">
-       
+      <img src={backimg}  alt='backimg' className='backimg'/>
+      <div className='block-black'></div>
        <div className='container'>
       
        <div className='form-insert'>
@@ -60,7 +62,7 @@ const [name, setName] = useState("");
         </div>
         <div>
           <div><label>Password:</label></div>
-          <input type="text" placehoder="Password" onChange={(event)=>{
+          <input type="password" placehoder="Password" onChange={(event)=>{
             setPassword(event.target.value)
           }}/>
         </div>
@@ -77,10 +79,9 @@ const [name, setName] = useState("");
         <br />
         <div className="show-data">
           <div className='thead'>
-            <div>Username</div>
-            <div>Email</div>
-            <div>Password</div>
-
+            <div><b>Username</b></div>
+            <div><b>Email</b></div>
+            <div><b>Password</b></div>
           </div>
         {DataUser.map((val, key) => {
           return (
